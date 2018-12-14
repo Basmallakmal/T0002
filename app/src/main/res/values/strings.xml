@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Data</string>
+    <string name="nama">Nama</string>
+    <string name="jumlahuang">Jumlah Uang</string>
+    <string name="tanggal">Tanggal</string>
+    <string name="tempattanggal">Tempat tanggal</string>
+    <string name="status">Status</string>
+    <string name="lunas">Lunas</string>
+    <string name="tidaklunas">Tidak Lunas</string>
+    <string name="simpanbtn">Simpan</string>
+    <string name="tampil">Tampilkan Data</string>
+</resources>
