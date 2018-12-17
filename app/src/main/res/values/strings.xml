@@ -9,4 +9,9 @@
     <string name="tidaklunas">Tidak Lunas</string>
     <string name="simpanbtn">Simpan</string>
     <string name="tampil">Tampilkan Data</string>
+    <string name="tnama">tempat nama</string>
+    <string name="tempatuang">tuang</string>
+    <string name="kembali">kembali</string>
+    <string name="update">Update</string>
+    <string name="tid">tempatid</string>
 </resources>
