@@ -5,8 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +18,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.aladziviesoft.data.adapter.DBAdapter;
+import com.aladziviesoft.data.adapter.ListTaawunAdapter;
+import com.aladziviesoft.data.model.ListTaawunModel;
+
+import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ListTaawunAcivity extends AppCompatActivity {
     String[] daftar;
@@ -23,12 +33,21 @@ public class ListTaawunAcivity extends AppCompatActivity {
     protected Cursor cursor;
     DBAdapter dbcenter;
     public static ListTaawunAcivity ma;
+    @BindView(R.id.rec_list_taawun)
+    RecyclerView recListTaawun;
 
+    ListTaawunAdapter adapter;
+    ArrayList<ListTaawunModel> arrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_taawun_acivity);
+        ButterKnife.bind(this);
+
+        recListTaawun.setHasFixedSize(true);
+        GridLayoutManager layoutManager = new GridLayoutManager(ListTaawunAcivity.this, 1, LinearLayoutManager.VERTICAL, false);
+        recListTaawun.setLayoutManager(layoutManager);
 
         ma = this;
         dbcenter = new DBAdapter(this);
@@ -60,16 +79,19 @@ public class ListTaawunAcivity extends AppCompatActivity {
 
     public void RefreshList() {
         SQLiteDatabase db = dbcenter.getReadableDatabase();
-        cursor = db.rawQuery("SELECT * FROM data_pembayaran",null);
+        cursor = db.rawQuery("SELECT * FROM data_pembayaran", null);
         daftar = new String[cursor.getCount()];
         cursor.moveToFirst();
-        for (int cc=0; cc < cursor.getCount(); cc++){
+        for (int cc = 0; cc < cursor.getCount(); cc++) {
             cursor.moveToPosition(cc);
             daftar[cc] = cursor.getString(1).toString();
         }
-        ListView01 = (ListView)findViewById(R.id.listView1);
-        ListView01.setAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_1, daftar));
-        ListView01.setSelected(true);
+        ListView01 = (ListView) findViewById(R.id.listView1);
+//        ListView01.setAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_1, daftar));
+//        ListView01.setSelected(true);
+        adapter = new ListTaawunAdapter(ListTaawunAcivity.this, arrayList);
+        recListTaawun.setAdapter(adapter);
+
         ListView01.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 
@@ -80,27 +102,28 @@ public class ListTaawunAcivity extends AppCompatActivity {
                 builder.setTitle("Pilihan");
                 builder.setItems(dialogitem, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
-                        switch(item){
-                            case 0 :
+                        switch (item) {
+                            case 0:
                                 Intent i = new Intent(getApplicationContext(), DetailActivity.class);
                                 i.putExtra("nama_pembayar", selection);
                                 startActivity(i);
                                 break;
-                            case 1 :
+                            case 1:
                                 Intent in = new Intent(getApplicationContext(), UpdateActivity.class);
                                 in.putExtra("nama_pembayar", selection);
                                 startActivity(in);
                                 break;
-                            case 2 :
+                            case 2:
                                 SQLiteDatabase db = dbcenter.getWritableDatabase();
-                                db.execSQL("delete from data_pembayaran where nama_pembayar = '"+selection+"'");
+                                db.execSQL("delete from data_pembayaran where nama_pembayar = '" + selection + "'");
                                 RefreshList();
                                 break;
                         }
                     }
                 });
                 builder.create().show();
-            }});
-        ((ArrayAdapter)ListView01.getAdapter()).notifyDataSetInvalidated();
+            }
+        });
+        ((ArrayAdapter) ListView01.getAdapter()).notifyDataSetInvalidated();
     }
 }
