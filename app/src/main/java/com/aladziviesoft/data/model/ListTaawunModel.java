@@ -1,13 +1,23 @@
 package com.aladziviesoft.data.model;
 
 public class ListTaawunModel {
-    String Nama, JumlahUang, Tanggal, Status;
+    String Id, Nama, JumlahUang, Tanggal, Status, IdKegiatan;
 
-    public ListTaawunModel(String nama, String jumlahUang, String tanggal, String status) {
-        Nama = nama;
-        JumlahUang = jumlahUang;
-        Tanggal = tanggal;
-        Status = status;
+    public ListTaawunModel(String id, String nama, String jumlahUang, String tanggal, String status, String idKegiatan) {
+        this.Id = id;
+        this.Nama = nama;
+        this.JumlahUang = jumlahUang;
+        this.Tanggal = tanggal;
+        this.Status = status;
+        this.IdKegiatan = idKegiatan;
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
     }
 
     public String getNama() {
@@ -40,5 +50,13 @@ public class ListTaawunModel {
 
     public void setStatus(String status) {
         Status = status;
+    }
+
+    public String getIdKegiatan(){
+        return IdKegiatan;
+    }
+
+    public void setIdKegiatan(String idKegiatan){
+        IdKegiatan = idKegiatan;
     }
 }

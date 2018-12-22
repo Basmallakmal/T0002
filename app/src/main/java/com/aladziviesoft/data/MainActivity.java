@@ -22,11 +22,13 @@ public class MainActivity extends AppCompatActivity {
 
     private Button simpan;
     private EditText nama;
+    private TextView idkegiatan;
     private EditText jumlahuang;
     private TextView tanggal;
     private RadioGroup rgrub;
     private RadioButton rbutton;
     private DBCRUD koneksi;
+    String idkeg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
         jumlahuang = (EditText) findViewById(R.id.uang);
         tanggal = (TextView) findViewById(R.id.tanggal);
         rgrub = (RadioGroup) findViewById(R.id.rgrub);
+        idkegiatan = (TextView) findViewById(R.id.tidkeg);
+        idkeg = getIntent().getStringExtra("id_kegiatan");
+        idkegiatan.setText(idkeg);
 
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -65,8 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_favorite2) {
-            Intent a = new Intent(getApplicationContext(), ListTaawunAcivity.class);
-            startActivity(a);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);
@@ -76,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         String snama = nama.getText().toString();
         String suang = jumlahuang.getText().toString();
         String stanggal = tanggal.getText().toString();
+        String sidkeg = idkegiatan.getText().toString();
         int selectedid = rgrub.getCheckedRadioButtonId();
         rbutton = (RadioButton) findViewById(selectedid);
         String srbutton = rbutton.getText().toString();
@@ -83,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         if (snama.isEmpty() || suang.isEmpty()) {
             Toast.makeText(MainActivity.this, "Masukkan Nama dan Jumlah uang", Toast.LENGTH_SHORT).show();
         } else {
-            long id = koneksi.insertData(snama, suang, stanggal, srbutton);
+            long id = koneksi.insertData(snama, suang, stanggal, srbutton, sidkeg);
             if (id <= 0) {
                 Toast.makeText(MainActivity.this, "Gagal", Toast.LENGTH_SHORT).show();
                 nama.setText("");
@@ -94,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
                 jumlahuang.setText("");
             }
         }
-        ListTaawunAcivity.ma.RefreshList();
         finish();
     }
 

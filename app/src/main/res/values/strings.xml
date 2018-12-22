@@ -14,4 +14,18 @@
     <string name="kembali">kembali</string>
     <string name="update">Update</string>
     <string name="tid">tempatid</string>
+    <string name="id">id</string>
+    <string name="totaldata">Total Uang  :</string>
+    <string name="totaluangL">Uang Lunas  :</string>
+    <string name="totaluangTL">Uang Tidak Lunas  :</string>
+    <string name="totallunas">Data Lunas  :</string>
+    <string name="totaltlunas">Data Tidak Lunas  :</string>
+    <string name="tempatutlunas">tempatTL</string>
+    <string name="tempatulunas">tempatL</string>
+    <string name="totalUlunas">Uang Lunas  :</string>
+    <string name="totalUTlunas">Uang Tidak Lunas  :</string>
+    <string name="datakegiatan">Data Kegiatan</string>
+    <string name="namakegiatan">Nama Kegiatan</string>
+
+
 </resources>

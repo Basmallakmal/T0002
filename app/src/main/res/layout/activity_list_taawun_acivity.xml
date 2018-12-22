@@ -7,20 +7,107 @@
     android:orientation="vertical"
     tools:context=".ListTaawunAcivity">
 
-    <ListView
-        android:id="@+id/listView1"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+        android:orientation="horizontal">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rec_list_taawun"
+        <TextView
+            android:id="@+id/totaldata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/totaldata" />
+
+        <TextView
+            android:id="@+id/tempattotaldata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/totaldata" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/totallunas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/totallunas" />
+
+        <TextView
+            android:id="@+id/tempattotallunas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/totallunas" />
+
+        <TextView
+            android:id="@+id/totalulunas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/totalUlunas" />
+
+        <TextView
+            android:id="@+id/tempattotalulunas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tempatulunas" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/totaltidaklunas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/totaltlunas" />
+
+        <TextView
+            android:id="@+id/tempattotaltlunas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/tempatutlunas" />
+
+        <TextView
+            android:id="@+id/totalutidaklunas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/totalUTlunas" />
+
+        <TextView
+            android:id="@+id/tempattotalutlunas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tempatutlunas" />
+
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/Swipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
 
-    </android.support.v7.widget.RecyclerView>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rec_list_taawun"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+        </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 
 </LinearLayout>

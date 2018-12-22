@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,6 +54,8 @@ public class UpdateActivity extends AppCompatActivity {
     private RadioButton uprbutton;
     private DBAdapter koneksi;
     protected Cursor cursor;
+    String id;
+    String nama;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +63,8 @@ public class UpdateActivity extends AppCompatActivity {
         setContentView(R.layout.activity_update);
         ButterKnife.bind(this);
 
-
+        id = getIntent().getStringExtra("_id");
+        nama = getIntent().getStringExtra("nama_pembayar");
         koneksi = new DBAdapter(this);
 
         Calendar c = Calendar.getInstance();
@@ -68,10 +72,13 @@ public class UpdateActivity extends AppCompatActivity {
         String formattedDate = df.format(c.getTime());
         uptanggal.setText(formattedDate);
 
+
+
         SQLiteDatabase db = koneksi.getReadableDatabase();
-        cursor = db.rawQuery("SELECT * FROM data_pembayaran WHERE nama_pembayar = '" +
-                getIntent().getStringExtra("nama_pembayar") + "'", null);
+        cursor = db.rawQuery("SELECT * FROM data_pembayaran WHERE _id = '" + id + "'", null);
         cursor.moveToFirst();
+        Log.d("datasss", cursor.toString());
+
         if (cursor.getCount() > 0) {
             cursor.moveToPosition(0);
             textView9.setText(cursor.getString(0));
@@ -96,10 +103,8 @@ public class UpdateActivity extends AppCompatActivity {
                         upnama.getText().toString() + "', jumlah_uang='" +
                         upuang.getText().toString() + "', tanggal_bayar='" +
                         uptanggal.getText().toString() + "', status='" +
-                        uprbutton.getText().toString() + "' where _id='" +
-                        textView9.getText().toString() + "'");
+                        uprbutton.getText().toString() + "' where _id='" + id + "'");
                 Toast.makeText(getApplicationContext(), "Berhasil", Toast.LENGTH_LONG).show();
-                ListTaawunAcivity.ma.RefreshList();
                 finish();
             }
         });
